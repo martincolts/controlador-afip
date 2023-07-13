@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import Loader from './Graphic';
+import Loader from './FilesLoader';
 
 
 function App() {
