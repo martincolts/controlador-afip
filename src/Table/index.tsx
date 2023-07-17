@@ -8,13 +8,13 @@ interface DataTableProps {
 }
 const DataTable: React.FC<DataTableProps> = ({  values }) => {
   console.log('Values', values)
+  console.log('Values len', values.length)
   const table = useReactTable({
     data: values,
     columns: columns,
     getCoreRowModel: getCoreRowModel(),
   })
 
-    
   return (
     <div className="p-2">
       <table>
