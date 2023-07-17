@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/controlador-afip/static/css/main.073c9b0a.css",
+    "main.js": "/controlador-afip/static/js/main.dfc73bd9.js",
+    "static/js/787.b9be85c5.chunk.js": "/controlador-afip/static/js/787.b9be85c5.chunk.js",
+    "index.html": "/controlador-afip/index.html",
+    "main.073c9b0a.css.map": "/controlador-afip/static/css/main.073c9b0a.css.map",
+    "main.dfc73bd9.js.map": "/controlador-afip/static/js/main.dfc73bd9.js.map",
+    "787.b9be85c5.chunk.js.map": "/controlador-afip/static/js/787.b9be85c5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.dfc73bd9.js"
+  ]
+}
