@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import Papa, { ParseResult } from "papaparse"
-import { Button, Container, Input, Stack } from '@mui/material';
+import { Button, Container, Input, Stack, Box } from '@mui/material';
 import DataTable from "../Table";
 import { table } from "console";
 import Grid from '@mui/material/Grid';
+import Info from "../Info";
 
-type Data = {
+export type Row = {
   date: string
   type: string
   sellPoint: string
   numberFrom: string
   numberTo: string
-  updateCod: string
-  authorization: string
+  authCod: string
   typeReceptorCode: string
   docReceptor: string
   receptorDenomination: string
@@ -23,53 +23,53 @@ type Data = {
   impNoExenras: string
   iva: number
   total: number
+  fileType: string
+}
+
+const  ParseToData = (data: any[]) => {
+  return {
+    date: data[0],
+    type: data[1],
+    sellPoint: data[2],
+    numberFrom: data[3],
+    numberTo: data[4],
+    authCod: data[5],
+    typeReceptorCode: data[6],
+    docReceptor: data[7],
+  receptorDenomination: data[8],
+  changeType: data[9],
+  currency: data[10],
+  taxNet: data[11],
+  noTaxNet: data[12],
+  impNoExenras: data[13],
+  iva: data[14],
+  total: parseFloat(data[15]),
+  } as Row;
 }
 
 function Loader() {
-  // State to store parsed data
-  const [parsedData, setParsedData] = useState([]);
-  const [total, setTotal] = useState(0)
-  //State to store table Column name
-  const [tableRows, setTableRows] = useState([]);
+
 
   //State to store the values
   const [values, setValues] = useState([]);
 
   const changeHandler = (event) => {
-    console.log('TARGET', event.target.files)
-    // Passing file data (event.target.files[0]) to parse using Papa.parse
+
     const files = event.target.files
-    const rowsArray = [];
-    const valuesArray = [];
-    let total = 0
+
+    const valuesArray: Row[] = [];
     for (const f of files) {
       console.log(f)
       Papa.parse(f, {
         header: true,
         skipEmptyLines: true,
-        complete: function (results: ParseResult<Data>) {
-
-
-          // Iterating data to get column name and their values
-          results.data.map((d) => {
-            console.log('d', d)
-            rowsArray.push(Object.keys(d));
-            valuesArray.push(Object.values(d));
-            console.log('d[15]', d['Imp. Total'])
-            console.log('parseFloat(d[15])', parseFloat(d['Imp. Total']))
-            total = total + parseFloat(d['Imp. Total'])
+        complete: function (results: ParseResult<Row>) {
+          results.data.forEach((d) => {
+            const data = ParseToData(Object.values(d))
+            data.fileType = f.name.toLowerCase().includes("emitidos") ? 'Venta' : 'Gasto'
+            valuesArray.push(data);
           });
-
-          // Parsed Data Response in array format
-          setParsedData([parsedData]);
-
-          // Filtered Column Names
-          setTableRows(rowsArray[0]);
-
-          console.log(valuesArray)
-          // Filtered Values
           setValues(valuesArray);
-          setTotal(total)
         },
       });
     }
@@ -77,22 +77,16 @@ function Loader() {
   };
 
   const clear = () => {
-    setParsedData([])
-    setTableRows([])
     setValues([])
-    setTotal(0)
   }
 
-  function currencyFormat(num: number) {
-    return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-  }
+
 
   return (
-    <Grid container marginTop={2}>
-      <Grid spacing={2}>
+    <Grid container marginTop={2} width={'100%'}>
+      <Grid spacing={2} width={'100%'}>
         <Stack direction={"row"} spacing={2}>
       <label htmlFor="csv-files">
-      {currencyFormat(total)}
       {/* File Uploader */}
       <input
       id="csv-files"
@@ -110,9 +104,18 @@ function Loader() {
   </label>
   <Button color="primary" variant="contained" onClick={clear}>Borrar Todo</Button>
   </Stack>
-      {tableRows && values && tableRows.length > 0 && values.length > 0 &&
-        <DataTable tableRows={tableRows} values={values}/>
+  <Grid container width={'100%'}>
+  <Grid item xs={6}>
+    {values && values.length > 0 &&
+        <DataTable values={values}/>
       }
+
+</Grid>
+<Grid item xs={6}>
+{values && values.length > 0 && <Info values={values} />}
+</Grid>
+</Grid>
+
      </Grid>
     </Grid>
   );
