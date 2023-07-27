@@ -51,13 +51,13 @@ function Loader() {
 
 
   //State to store the values
-  const [values, setValues] = useState([]);
-
+  const [values, setValues] = useState<Row[]>([]);
+  let valuesArray: Row[] = [];
   const changeHandler = (event) => {
 
     const files = event.target.files
 
-    const valuesArray: Row[] = [];
+    
     for (const f of files) {
       console.log(f)
       Papa.parse(f, {
@@ -65,19 +65,30 @@ function Loader() {
         skipEmptyLines: true,
         complete: function (results: ParseResult<Row>) {
           results.data.forEach((d) => {
+            console.log('parsing')
             const data = ParseToData(Object.values(d))
             data.fileType = f.name.toLowerCase().includes("emitidos") ? 'Venta' : 'Gasto'
             valuesArray.push(data);
           });
-          setValues(valuesArray);
+          
         },
       });
     }
 
   };
 
+  // React.useEffect(() => {
+  //   setValues(valuesArray)
+  // }, [valuesArray])
+
   const clear = () => {
+    //setValues([])
+    valuesArray = []
     setValues([])
+  }
+
+  const show = () => {
+    setValues(valuesArray)
   }
 
 
@@ -103,16 +114,17 @@ function Loader() {
   </Button>
   </label>
   <Button color="primary" variant="contained" onClick={clear}>Borrar Todo</Button>
+  <Button color="primary" variant="contained" onClick={show}>Mostrar</Button>
   </Stack>
   <Grid container width={'100%'}>
   <Grid item xs={6}>
-    {values && values.length > 0 &&
+
         <DataTable values={values}/>
-      }
+
 
 </Grid>
 <Grid item xs={6}>
-{values && values.length > 0 && <Info values={values} />}
+ <Info values={values} />
 </Grid>
 </Grid>
 
