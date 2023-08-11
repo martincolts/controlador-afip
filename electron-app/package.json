@@ -1,8 +1,9 @@
 {
   "name": "electron-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "App to control clients",
   "main": "main.js",
+  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron-forge start",
@@ -10,7 +11,10 @@
     "make": "electron-forge make"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "email": "martin@mail.com",
+    "name": "Martin Lopez"
+  },
   "license": "ISC",
   "devDependencies": {
     "@electron-forge/cli": "^6.2.1",
@@ -22,6 +26,7 @@
     "electron": "^25.4.0"
   },
   "dependencies": {
+    "electron-is-dev": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0"
   }
 }

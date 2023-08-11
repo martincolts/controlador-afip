@@ -1,16 +1,27 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
+const isDev = require('electron-is-dev');
+const {ipcMain} = require('electron')
 
-function createWindow () {
+function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preloaded.js'),
+      nodeIntegration: true,
+      contextIsolation: true,
     }
   })
 
-  win.loadFile('build/index.html')
+  if (isDev) {
+    win.loadURL('http://localhost:3000')
+  } else {
+    win.loadFile('build/index.html')
+  }
+
+  win.webContents.openDevTools({ mode: 'detach' })
+
 }
 
 app.whenReady().then(() => {
@@ -27,4 +38,11 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
+})
+
+ipcMain.on('synchronous-message', (event, arg) => {
+  console.log("message ", arg) 
+
+  // Synchronous event emmision
+  event.sender()
 })
