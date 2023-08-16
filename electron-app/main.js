@@ -2,6 +2,12 @@ const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev');
 const {ipcMain} = require('electron')
+const { dbService } = require('./db')
+const { RecordService } = require('./services/recordService')
+dbService.runMigrations()
+
+const recordService = new RecordService(dbService)
+
 
 function createWindow() {
   const win = new BrowserWindow({
