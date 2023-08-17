@@ -33,10 +33,9 @@ function createWindow() {
 
 app.whenReady().then(() => {
   ipcMain.handle('synchronous-message', async (event, payload) => {
-    console.log("message ", payload) 
-  
-    //return await eventController.processMessage(payload)
-    return { message: 'hello there!'}
+    console.log(' mensajeeee papu', payload)
+    return {message: 'sarasa'}
+    return await eventController.processMessage(payload)
   })
   createWindow()
 

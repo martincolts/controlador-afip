@@ -3,13 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ElectronContext } from './Context';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+//@ts-ignore    
+console.log('the apiiiii', window.API)
 root.render(
   <React.StrictMode>
-    <App />
+    {//@ts-ignore    
+      <ElectronContext.Provider value={window.API}>
+        <App />
+      </ElectronContext.Provider>}
   </React.StrictMode>
 );
 
