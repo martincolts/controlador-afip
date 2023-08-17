@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import { Row } from '../FilesLoader/index'
 import columns from './columns'
+import { Row } from '../model/row'
 
 interface DataTableProps {
     

@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { Row } from "../FilesLoader"
 import { Stack } from '@mui/material';
 import { currencyFormat } from "../Utils";
+import { Row } from '../model/row';
 
 interface InfoProps {
     values: Row[]
@@ -9,7 +9,7 @@ interface InfoProps {
 
 const Info: React.FC<InfoProps> = ({ values }) => {
 
-    const calculateTotal = (type: string ): number => {
+    const calculateTotal = (type: string): number => {
         return values.filter(v => v.fileType === type).reduce((accum, value) => {
             return accum + value.total
         }, 0)
@@ -20,7 +20,7 @@ const Info: React.FC<InfoProps> = ({ values }) => {
             Gastos Totales: {currencyFormat(calculateTotal('Gasto'))}
         </div>
         <div>
-        Ingresos Totales: {currencyFormat(calculateTotal('Venta'))}
+            Ingresos Totales: {currencyFormat(calculateTotal('Venta'))}
         </div>
     </Stack>
 }

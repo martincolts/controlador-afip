@@ -51,7 +51,7 @@ class DBService {
         })
     }
 
-    selectById(id) {
+    selectRecordById(id) {
         return new Promise((resolve, reject) => {
             db.serialize(() => {
                 db.get("select * from client_record where id = ?;", [id], (err, row) => {
@@ -64,7 +64,7 @@ class DBService {
         })
     }
 
-    selectByComposedId(composedId) {
+    selectRecordByComposedId(composedId) {
         return new Promise((resolve, reject) => {
             db.serialize(() => {
                 db.get("select * from client_record where composed_id = ?;", [composedId], (err, row) => {
@@ -77,7 +77,7 @@ class DBService {
         })
     }
 
-    selectByDates(dateFrom, dateTo) {
+    selectRecordsBetweenDates(dateFrom, dateTo) {
         return new Promise((resolve, reject) => {
             db.serialize(() => {
                 db.all("select * from client_record where date(record_date) between date(?) and date(?);", [dateFrom, dateTo], (err, rows) => {
@@ -90,7 +90,7 @@ class DBService {
         })
     }
 
-    selectByClientCuit(clientCuit) {
+    selectRecordsByClientCuit(clientCuit) {
         return new Promise((resolve, reject) => {
             db.serialize(() => {
                 db.all("select * from client_record where client_cuit = ?", [clientCuit], (err, rows) => {

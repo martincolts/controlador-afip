@@ -7,9 +7,9 @@ import { Button } from '@mui/material';
 
 function App() {
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     //@ts-ignore
-    const response = window.api.sendMessage('synchronous-message', {message: 'hi'})
+    const response = await window.API.invokeBackend('synchronous-message', {message: 'hi'})
     console.log(response)
   }
   return (

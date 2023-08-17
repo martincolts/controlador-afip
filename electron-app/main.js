@@ -4,9 +4,10 @@ const isDev = require('electron-is-dev');
 const {ipcMain} = require('electron')
 const { dbService } = require('./db')
 const { RecordService } = require('./services/recordService')
-dbService.runMigrations()
-
+const { EventController } = require('./controllers/index')
 const recordService = new RecordService(dbService)
+const eventController = new EventController(recordService)
+dbService.runMigrations()
 
 
 function createWindow() {
@@ -31,6 +32,12 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  ipcMain.handle('synchronous-message', async (event, payload) => {
+    console.log("message ", payload) 
+  
+    //return await eventController.processMessage(payload)
+    return { message: 'hello there!'}
+  })
   createWindow()
 
   app.on('activate', () => {
@@ -44,11 +51,4 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
-})
-
-ipcMain.on('synchronous-message', (event, arg) => {
-  console.log("message ", arg) 
-
-  // Synchronous event emmision
-  event.sender()
 })

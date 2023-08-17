@@ -1,6 +1,7 @@
 import { createColumnHelper } from '@tanstack/react-table';
-import { Row } from '../FilesLoader';
+
 import { currencyFormat } from '../Utils';
+import { Row } from '../model/row';
 
 const columnHelper = createColumnHelper<Row>()
 
