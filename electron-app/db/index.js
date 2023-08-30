@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('db.db');
 const migrations = require('./migrations.js')
 
-class DBService {
+class DBRepository {
     constructor() { }
 
     runMigrations() {
@@ -102,11 +102,45 @@ class DBService {
             })
         })
     }
+
+    insertClient({
+        cuit, 
+        firstName,
+        lastName,
+        dni,
+        phone
+    }) {
+        return new Promise((resolve, reject) => {
+            db.serialize(() => {
+                const statement = db.prepare("INSERT INTO client (cuit, first_name, last_name, dni, phone) values (?,?,?,?,?)")
+                statement.run([cuit, firstName, lastName, dni, phone], (err) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(true)
+                    }
+                })
+            })
+        })
+    }
+
+    listClients() {
+        return new Promise((resolve, reject) => {
+            db.serialize(() => {
+                db.all("select * from client", (err, rows) => {
+                    if (err) {
+                        reject(err)
+                    }
+                    resolve(rows)
+                })
+            })
+        })
+    }
 }
 
-const dbService = new DBService()
+const dbRepository = new DBRepository()
 module.exports = {
-    dbService
+    dbService: dbRepository
 }
 // dbService.runMigrations().then(async data => {
 //     await dbService.insertRecord({
@@ -143,4 +177,24 @@ module.exports = {
 //     inDates = await dbService.selectByDates('2021-07-21', '2023-05-20')
     
     
+// })
+
+// dbService.runMigrations().then( async data => {
+//     await dbService.insertClient({
+//         cuit: "20344214787",
+//         firstName: "Martin",
+//         lastName: "Lopez",
+//         dni: "34421478",
+//         phone: "2494209692"
+//     })
+//     await dbService.insertClient({
+//         cuit: "20344214788",
+//         firstName: "Martin",
+//         lastName: "Lopez",
+//         dni: "344214789",
+//         phone: "2494209692"
+//     })
+
+//     const result = await dbService.listClients()
+//     console.log(result)
 // })

@@ -15,8 +15,18 @@ const createRecordTable = `CREATE TABLE IF NOT EXISTS client_record (
     total_amount real not null
 );`
 
+const createClientTable = `CREATE TABLE IF NOT EXISTS client (
+    id integer primary key autoincrement,
+    cuit text not null unique,
+    first_name text not null,
+    last_name text not null,
+    dni integer,
+    phone text
+)`
+
 const migrations = [
-    createRecordTable
+    createRecordTable,
+    createClientTable
 ]
 
 module.exports = migrations

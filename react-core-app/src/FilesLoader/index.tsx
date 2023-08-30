@@ -1,29 +1,26 @@
 import React, { useState } from "react";
-import { Button, Stack } from '@mui/material';
+import { Button, Stack } from "@mui/material";
 import DataTable from "../Table";
-import Grid from '@mui/material/Grid';
+import Grid from "@mui/material/Grid";
 import Info from "../Info";
 import { Row } from "../model/row";
-import { changeHandler } from "../Utils";
+import { loadingFilesHandler } from "../Utils";
 
 function Loader() {
-
-  const [values, setValues] = useState<Row[]>([]);
+  const [filesData, setFilesData] = useState<Row[]>([]);
 
   const show = async (event: any) => {
-    const r = await changeHandler(event)    
-    setValues(r)
-  }
+    const data = await loadingFilesHandler(event);
+    setFilesData(data);
+  };
 
   const clear = () => {
-    setValues([])
-  }
-
-
+    setFilesData([]);
+  };
 
   return (
-    <Grid container marginTop={2} width={'100%'}>
-      <Grid spacing={2} width={'100%'}>
+    <Grid container marginTop={2} width={"100%"}>
+      <Grid spacing={2} width={"100%"}>
         <Stack direction={"row"} spacing={2}>
           <label htmlFor="csv-files">
             {/* File Uploader */}
@@ -41,24 +38,22 @@ function Loader() {
               Cargar Archivos CSV
             </Button>
           </label>
-          <Button color="primary" variant="contained" onClick={clear}>Borrar Todo</Button>
+          <Button color="primary" variant="contained" onClick={clear}>
+            Borrar Todo
+          </Button>
           {/* <Button color="primary" variant="contained" onClick={show}>Mostrar</Button> */}
         </Stack>
-        <Grid container width={'100%'}>
+        <Grid container width={"100%"}>
           <Grid item xs={6}>
-
-            <DataTable values={values} />
-
-
+            <DataTable values={filesData} />
           </Grid>
           <Grid item xs={6}>
-            <Info values={values} />
+            <Info values={filesData} />
           </Grid>
         </Grid>
-
       </Grid>
     </Grid>
   );
 }
 
-export default Loader
+export default Loader;

@@ -1,8 +1,9 @@
 const { actions } = require('./actions')
 
 class EventController {
-    constructor(recordService) {
+    constructor(recordService, clientService) {
         this.recordService = recordService
+        this.clientService = clientService
     }
 
     async processMessage({action, payload}) {

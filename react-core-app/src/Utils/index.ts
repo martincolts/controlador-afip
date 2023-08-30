@@ -7,7 +7,7 @@ export function currencyFormat(num: number) {
 }
 
 
-const changeHandler = (event: any): Promise<Row[]> => {
+const loadingFilesHandler = (event: any): Promise<Row[]> => {
   return new Promise(async (resolve, reject) => {
     let valuesArray: Row[] = [];
     const files = event.target.files
@@ -36,5 +36,5 @@ const changeHandler = (event: any): Promise<Row[]> => {
 };
 
 export {
-  changeHandler
+  loadingFilesHandler
 }

@@ -1,26 +1,26 @@
 class RecordService {
-    constructor(dbService) {
-        this.dbService = dbService
+    constructor(dbRepository) {
+        this.dbRepository = dbRepository
     }
 
     async insertRecord(record) {
-        return await this.dbService.insertRecord(record)
+        return await this.dbRepository.insertRecord(record)
     }
 
     async selectById(id) {
-        return await this.dbService.selectRecordById(id)
+        return await this.dbRepository.selectRecordById(id)
     }
 
     async selectByComposedId(composedId) {
-        return await this.dbService.selectRecordByComposedId(composedId)
+        return await this.dbRepository.selectRecordByComposedId(composedId)
     }
 
     async selectByDates(dateFrom, dateTo) {
-        return await this.dbService.selectRecordsBetweenDates(dateFrom, dateTo)
+        return await this.dbRepository.selectRecordsBetweenDates(dateFrom, dateTo)
     }
 
     async selectByClientCuit(clientCuit) {
-        return await this.dbService.selectRecordsByClientCuit(clientCuit)
+        return await this.dbRepository.selectRecordsByClientCuit(clientCuit)
     }
 
 
