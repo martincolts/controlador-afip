@@ -108,12 +108,13 @@ class DBRepository {
         firstName,
         lastName,
         dni,
-        phone
+        phone,
+        email
     }) {
         return new Promise((resolve, reject) => {
             db.serialize(() => {
-                const statement = db.prepare("INSERT INTO client (cuit, first_name, last_name, dni, phone) values (?,?,?,?,?)")
-                statement.run([cuit, firstName, lastName, dni, phone], (err) => {
+                const statement = db.prepare("INSERT INTO client (cuit, first_name, last_name, dni, phone, email) values (?,?,?,?,?,?)")
+                statement.run([cuit, firstName, lastName, dni, phone, email], (err) => {
                     if (err) {
                         reject(err)
                     } else {
@@ -140,10 +141,10 @@ class DBRepository {
 
 const dbRepository = new DBRepository()
 module.exports = {
-    dbService: dbRepository
+   dbRepository
 }
-// dbService.runMigrations().then(async data => {
-//     await dbService.insertRecord({
+// dbRepository.runMigrations().then(async data => {
+//     await dbRepository.insertRecord({
 //         composedId: '1',
 //         clientCuit: 'efdf',
 //         date: '2023-05-20',
@@ -158,7 +159,7 @@ module.exports = {
 //         iva: 4565,
 //         totalAmount: 1224.5
 //     })
-//     await dbService.insertRecord({
+//     await dbRepository.insertRecord({
 //         composedId: '2',
 //         date: '2023-06-20',
 //         clientCuit: 'efdf',
@@ -173,21 +174,21 @@ module.exports = {
 //         iva: 4565,
 //         totalAmount: 1224.5
 //     })
-//     value = await dbService.selectByComposedId('2')
-//     inDates = await dbService.selectByDates('2021-07-21', '2023-05-20')
+//     value = await dbRepository.selectByComposedId('2')
+//     inDates = await dbRepository.selectByDates('2021-07-21', '2023-05-20')
     
     
 // })
 
-// dbService.runMigrations().then( async data => {
-//     await dbService.insertClient({
+// dbRepository.runMigrations().then( async data => {
+//     await dbRepository.insertClient({
 //         cuit: "20344214787",
 //         firstName: "Martin",
 //         lastName: "Lopez",
 //         dni: "34421478",
 //         phone: "2494209692"
 //     })
-//     await dbService.insertClient({
+//     await dbRepository.insertClient({
 //         cuit: "20344214788",
 //         firstName: "Martin",
 //         lastName: "Lopez",
@@ -195,6 +196,6 @@ module.exports = {
 //         phone: "2494209692"
 //     })
 
-//     const result = await dbService.listClients()
+//     const result = await dbRepository.listClients()
 //     console.log(result)
 // })

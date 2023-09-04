@@ -1,9 +1,10 @@
 import * as React from 'react';
 import './App.css';
 
-import Loader from './FilesLoader';
+import Loader from './Components/FilesLoader';
 import { Button } from '@mui/material';
 import { ElectronContext } from './Context';
+import CreateClientForm from './Components/ClientManager/CreateClientForm';
 
 function App() {
   const electronAPI = React.useContext(ElectronContext)
@@ -16,6 +17,7 @@ function App() {
     <React.Fragment>
       <Loader />
       <Button onClick={sendMessage}>Send message</Button>
+      <CreateClientForm></CreateClientForm>
     </React.Fragment>
   );
 }

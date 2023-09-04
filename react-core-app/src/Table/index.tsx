@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import columns from './columns'
-import { Row } from '../model/row'
+import { AFIPRecordRow } from '../model/record'
 
 interface DataTableProps {
     
-    values: Row[]
+    values: AFIPRecordRow[]
 }
 const DataTable: React.FC<DataTableProps> = ({  values }) => {
   console.log('Values', values)

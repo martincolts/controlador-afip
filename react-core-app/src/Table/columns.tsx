@@ -1,9 +1,9 @@
 import { createColumnHelper } from '@tanstack/react-table';
 
 import { currencyFormat } from '../Utils';
-import { Row } from '../model/row';
+import { AFIPRecordRow } from '../model/record';
 
-const columnHelper = createColumnHelper<Row>()
+const columnHelper = createColumnHelper<AFIPRecordRow>()
 
 const columns = [
     columnHelper.accessor(data => data.date, {

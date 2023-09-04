@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { Stack } from '@mui/material';
-import { currencyFormat } from "../Utils";
-import { Row } from '../model/row';
+import { currencyFormat } from "../../Utils";
+import { AFIPRecordRow } from '../../model/record';
 
 interface InfoProps {
-    values: Row[]
+    values: AFIPRecordRow[]
 }
 
 const Info: React.FC<InfoProps> = ({ values }) => {

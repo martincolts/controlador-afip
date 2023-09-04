@@ -11,3 +11,7 @@ class ClientService {
         return await this.dbRepository.listClients() 
     }
 }
+
+module.exports = {
+    ClientService
+}

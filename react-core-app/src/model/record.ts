@@ -1,4 +1,4 @@
-export type Row = {
+export type AFIPRecordRow = {
     date: string
     type: string
     sellPoint: string
@@ -18,7 +18,7 @@ export type Row = {
     fileType: string
 }
 
-const ParseToRow = (data: any[]): Row => {
+const ParseToRow = (data: any[]): AFIPRecordRow => {
     return {
         date: data[0],
         type: data[1],
@@ -36,7 +36,7 @@ const ParseToRow = (data: any[]): Row => {
         impNoExenras: parseFloat(data[13]),
         iva: parseFloat(data[14]),
         total: parseFloat(data[15]),
-    } as Row;
+    } as AFIPRecordRow;
 }
 
 

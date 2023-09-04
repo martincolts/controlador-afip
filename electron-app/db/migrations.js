@@ -21,7 +21,8 @@ const createClientTable = `CREATE TABLE IF NOT EXISTS client (
     first_name text not null,
     last_name text not null,
     dni integer,
-    phone text
+    phone text,
+    email text
 )`
 
 const migrations = [
