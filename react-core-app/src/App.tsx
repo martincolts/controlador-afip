@@ -5,6 +5,10 @@ import Loader from './Components/FilesLoader';
 import { Button } from '@mui/material';
 import { ElectronContext } from './Context';
 import CreateClientForm from './Components/ClientManager/CreateClientForm';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ClientList from './Components/ClientManager/ClientList';
+
+const queryClient = new QueryClient()
 
 function App() {
   const electronAPI = React.useContext(ElectronContext)
@@ -14,11 +18,13 @@ function App() {
   }
 
   return (
-    <React.Fragment>
+
+    <QueryClientProvider client={queryClient}>
       <Loader />
       <Button onClick={sendMessage}>Send message</Button>
+      <ClientList></ClientList>
       <CreateClientForm></CreateClientForm>
-    </React.Fragment>
+    </QueryClientProvider>
   );
 }
 

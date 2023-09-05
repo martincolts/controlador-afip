@@ -8,8 +8,7 @@ import { ElectronContext } from './Context';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-//@ts-ignore    
-console.log('the apiiiii', window.API)
+    
 root.render(
   <React.StrictMode>
     {//@ts-ignore    

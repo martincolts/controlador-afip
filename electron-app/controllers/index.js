@@ -9,15 +9,18 @@ class EventController {
     async processMessage({action, payload}) {
         switch (action) {
             case actions.CREATE_RECORD:
-                await this.recordService.createRecord(payload)
-                break
+                return await this.recordService.createRecord(payload)
             case actions.CREATE_RECORDS:
                 for (const record of payload) {
-                    await this.recordService.createRecord(record)
+                    return await this.recordService.createRecord(record)
                 }
                 break
             case actions.FILTER_RECORDS_BY_CLIENT_CUIT:
-                await this.recordService.selectById(payload.clientCuit)
+                return await this.recordService.selectById(payload.clientCuit)
+            case actions.CREATE_CLIENT:
+                return await this.clientService.insertClient(payload)
+            case actions.LIST_CLIENTS:
+                return await this.clientService.listClients()
         }
     }
 }

@@ -20,7 +20,7 @@ const createClientTable = `CREATE TABLE IF NOT EXISTS client (
     cuit text not null unique,
     first_name text not null,
     last_name text not null,
-    dni integer,
+    dni text not null unique,
     phone text,
     email text
 )`

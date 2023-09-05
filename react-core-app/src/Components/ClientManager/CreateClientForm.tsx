@@ -2,16 +2,27 @@ import * as React from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { Client } from "../../model/client";
 import { Box, Button, Stack, TextField } from "@mui/material";
+import useCreateClient from "../../QueryHooks/useCreateClient";
 
 interface CreateClientFormProps {}
 
 const CreateClientForm: React.FC<CreateClientFormProps> = ({}) => {
+  const createClient = useCreateClient()
   const {
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm<Client>();
-  const onSubmit: SubmitHandler<Client> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Client> = async (data: Client) => {
+    try {
+      await createClient.mutateAsync(data)
+      reset()
+     } catch (e) {
+        console.log(e) // show toast
+      }
+    
+  }
 
   return (
     <Box sx={{ width: 600 }}>
