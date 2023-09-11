@@ -2,11 +2,12 @@ import * as React from 'react';
 import './App.css';
 
 import Loader from './Components/FilesLoader';
-import { Button } from '@mui/material';
+import { Button, Container, Grid } from '@mui/material';
 import { ElectronContext } from './Context';
 import CreateClientForm from './Components/ClientManager/CreateClientForm';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ClientList from './Components/ClientManager/ClientList';
+import ClientManager from './Components/ClientManager';
 
 const queryClient = new QueryClient()
 
@@ -20,10 +21,16 @@ function App() {
   return (
 
     <QueryClientProvider client={queryClient}>
-      <Loader />
-      <Button onClick={sendMessage}>Send message</Button>
-      <ClientList></ClientList>
-      <CreateClientForm></CreateClientForm>
+      <Grid container spacing={1}>
+        <Grid item xs={2}>
+          <ClientManager />
+        </Grid>
+        <Grid item xs={10}>
+          <Loader />
+          <Button onClick={sendMessage}>Send message</Button>
+        </Grid>
+       
+      </Grid>
     </QueryClientProvider>
   );
 }

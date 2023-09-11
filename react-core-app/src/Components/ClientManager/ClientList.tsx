@@ -10,7 +10,7 @@ const ClientList: React.FC<ClientListProps> = () => {
   const { data } = useListClients();
   if (data) {
     return (
-      <Stack direction={"column"}>
+      <Stack direction={"column"} style={{maxHeight: 800, overflow: 'auto'}}>
         {data.map((client: Client) => {
           return <ClientCard key={client.id} client={client}></ClientCard>
         })}

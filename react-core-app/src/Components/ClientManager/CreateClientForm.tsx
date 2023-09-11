@@ -4,9 +4,11 @@ import { Client } from "../../model/client";
 import { Box, Button, Stack, TextField } from "@mui/material";
 import useCreateClient from "../../QueryHooks/useCreateClient";
 
-interface CreateClientFormProps {}
+interface CreateClientFormProps {
+  handleClose: () => void
+}
 
-const CreateClientForm: React.FC<CreateClientFormProps> = ({}) => {
+const CreateClientForm: React.FC<CreateClientFormProps> = ({ handleClose }) => {
   const createClient = useCreateClient()
   const {
     handleSubmit,
@@ -18,6 +20,7 @@ const CreateClientForm: React.FC<CreateClientFormProps> = ({}) => {
     try {
       await createClient.mutateAsync(data)
       reset()
+      handleClose()
      } catch (e) {
         console.log(e) // show toast
       }
@@ -25,9 +28,9 @@ const CreateClientForm: React.FC<CreateClientFormProps> = ({}) => {
   }
 
   return (
-    <Box sx={{ width: 600 }}>
+    <Box >
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack direction={"column"} spacing={4}>
+        <Stack direction={"column"} spacing={1}>
           <Controller
             name="firstName"
             control={control}
