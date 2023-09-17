@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ElectronContext } from './Context';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,6 +15,7 @@ root.render(
   <React.StrictMode>
     {//@ts-ignore    
       <ElectronContext.Provider value={window.API}>
+        <ToastContainer/>
         <App />
       </ElectronContext.Provider>}
   </React.StrictMode>

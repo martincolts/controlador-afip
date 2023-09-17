@@ -1,8 +1,8 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev');
-const {ipcMain} = require('electron')
-const {  dbRepository } = require('./db')
+const { ipcMain } = require('electron')
+const { dbRepository } = require('./db')
 const { RecordService } = require('./services/recordService')
 const { ClientService } = require('./services/clientService')
 const { EventController } = require('./controllers/index')
@@ -24,14 +24,14 @@ function createWindow() {
     }
   })
 
+  win.setMenu(null)
+
   if (isDev) {
     win.loadURL('http://localhost:3000')
+    win.webContents.openDevTools({ mode: 'detach' })
   } else {
     win.loadFile('build/index.html')
   }
-
-  win.webContents.openDevTools({ mode: 'detach' })
-
 }
 
 app.whenReady().then(() => {

@@ -8,9 +8,11 @@ interface ClientListProps {}
 
 const ClientList: React.FC<ClientListProps> = () => {
   const { data } = useListClients();
+ 
+
   if (data) {
     return (
-      <Stack direction={"column"} style={{maxHeight: 800, overflow: 'auto'}}>
+      <Stack direction={"column"} style={{maxHeight: 800, overflow: 'hidden', overflowY: 'auto'}} spacing={2} padding={2}>
         {data.map((client: Client) => {
           return <ClientCard key={client.id} client={client}></ClientCard>
         })}
