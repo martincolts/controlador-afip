@@ -31,9 +31,15 @@ const useRemoveClient = () => {
     return clientStore.removeClient
 }
 
+const useGetClient = (): string => {
+    const clientStore = useCurrentClientStore()
+    return clientStore.client
+}
+
 export {
      useCurrentClientStore,
      useClientIsSelected,
      useSetClient,
-     useRemoveClient
+     useRemoveClient,
+     useGetClient
 }

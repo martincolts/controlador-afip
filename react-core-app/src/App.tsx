@@ -12,11 +12,11 @@ import ClientManager from './Components/ClientManager';
 const queryClient = new QueryClient()
 
 function App() {
-  const electronAPI = React.useContext(ElectronContext)
-  const sendMessage = async () => {
-    const response = await electronAPI.invokeBackend('synchronous-message', { action: 'hi', payload: 'dsfdsf' })
-    console.log(response)
-  }
+  //const electronAPI = React.useContext(ElectronContext)
+  // const sendMessage = async () => {
+  //   const response = await electronAPI.invokeBackend('synchronous-message', { action: 'hi', payload: 'dsfdsf' })
+  //   console.log(response)
+  // }
 
   return (
 
@@ -27,7 +27,7 @@ function App() {
         </Grid>
         <Grid item xs={10}>
           <Loader />
-          <Button onClick={sendMessage}>Send message</Button>
+          {/* <Button onClick={sendMessage}>Send message</Button> */}
         </Grid>
        
       </Grid>
