@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { ElectronContext, actions } from "../Context";
+import { ElectronContext, actions } from "../../Context";
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { Client } from '../model/client';
+import { Client } from '../../model/client';
 
 
 function useCreateClient() {

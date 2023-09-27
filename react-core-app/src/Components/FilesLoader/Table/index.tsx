@@ -8,8 +8,6 @@ interface DataTableProps {
     values: AFIPRecordRow[]
 }
 const DataTable: React.FC<DataTableProps> = ({  values }) => {
-  console.log('Values', values)
-  console.log('Values len', values.length)
   const table = useReactTable({
     data: values,
     columns: columns,

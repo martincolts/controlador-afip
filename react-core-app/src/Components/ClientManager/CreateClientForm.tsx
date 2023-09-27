@@ -2,7 +2,7 @@ import * as React from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { Client } from "../../model/client";
 import { Box, Button, Stack, TextField } from "@mui/material";
-import useCreateClient from "../../QueryHooks/useCreateClient";
+import useCreateClient from "../../Hooks/QueryHooks/useCreateClient";
 
 interface CreateClientFormProps {
   handleClose: () => void

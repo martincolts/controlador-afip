@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { ElectronContext, actions } from '../Context'
-import { Client } from '../model/client'
+import { ElectronContext, actions } from '../../Context'
+import { Client } from '../../model/client'
 
 function useListClients() {
     const electronAPI = React.useContext(ElectronContext)

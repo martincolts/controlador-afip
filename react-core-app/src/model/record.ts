@@ -1,6 +1,7 @@
 export type AFIPRecordRow = {
+    clientCuit? :string,
     date: string
-    type: string
+    receiptType: string
     sellPoint: string
     numberFrom: string
     numberTo: string
@@ -12,7 +13,7 @@ export type AFIPRecordRow = {
     currency: string
     taxNet: number
     noTaxNet: number
-    impNoExenras: number
+    impOpExentas: number
     iva: number
     total: number
     fileType: string
@@ -21,7 +22,7 @@ export type AFIPRecordRow = {
 const ParseToRow = (data: any[]): AFIPRecordRow => {
     return {
         date: data[0],
-        type: data[1],
+        receiptType: data[1],
         sellPoint: data[2],
         numberFrom: data[3],
         numberTo: data[4],
@@ -31,11 +32,11 @@ const ParseToRow = (data: any[]): AFIPRecordRow => {
         receptorDenomination: data[8],
         changeType: data[9],
         currency: data[10],
-        taxNet: parseFloat(data[11]),
-        noTaxNet: parseFloat(data[12]),
-        impNoExenras: parseFloat(data[13]),
-        iva: parseFloat(data[14]),
-        total: parseFloat(data[15]),
+        taxNet: parseFloat(data[11]) || 0.0,
+        noTaxNet: parseFloat(data[12]) || 0.0,
+        impOpExentas: parseFloat(data[13]) || 0.0,
+        iva: parseFloat(data[14]) || 0.0,
+        total: parseFloat(data[15]) || 0.0,
     } as AFIPRecordRow;
 }
 

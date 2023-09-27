@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
 import * as React from "react";
-import useListClients from "../../QueryHooks/useListClients";
+import useListClients from "../../Hooks/QueryHooks/useListClients";
 import { Client } from "../../model/client";
 import ClientCard from "./ClientCard";
 

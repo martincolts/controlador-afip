@@ -4,6 +4,7 @@ class RecordService {
     }
 
     async insertRecord(record) {
+        record.composedId = `${record.clientCuit}_${record.date}_${record.sellPoint}_${record.numberFrom}_${record.numberTo}_${record.authCod}_${record.fileType}`
         return await this.dbRepository.insertRecord(record)
     }
 

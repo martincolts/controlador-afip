@@ -22,7 +22,7 @@ const columns = [
         cell: info => info.getValue(),
         header: 'Tipo de registro'
     }),
-    columnHelper.accessor(data => data.type, {
+    columnHelper.accessor(data => data.receiptType, {
         cell: info => info.getValue(),
         header: 'Tipo'
     }),
@@ -70,7 +70,7 @@ const columns = [
         cell: info => info.getValue(),
         header: 'Imp neto no gravado'
     }),
-    columnHelper.accessor(data => data.impNoExenras, {
+    columnHelper.accessor(data => data.impOpExentas, {
         cell: info => info.getValue(),
         header: 'Imp. Op. Exentas'
     }),

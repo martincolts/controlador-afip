@@ -9,11 +9,12 @@ class EventController {
     async processMessage({action, payload}) {
         switch (action) {
             case actions.CREATE_RECORD:
-                return await this.recordService.createRecord(payload)
+                return await this.recordService.insertRecord(payload)
             case actions.CREATE_RECORDS:
                 for (const record of payload) {
-                    return await this.recordService.createRecord(record)
+                    await this.recordService.insertRecord(record)
                 }
+                return true
                 break
             case actions.FILTER_RECORDS_BY_CLIENT_CUIT:
                 return await this.recordService.selectById(payload.clientCuit)

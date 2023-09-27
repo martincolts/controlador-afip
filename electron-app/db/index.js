@@ -27,21 +27,27 @@ class DBRepository {
         composedId,
         clientCuit,
         date,
-        type,
-        recordType,
+        sellPoint,
         numberFrom,
         numberTo,
+        authCod,
+        typeReceptorCode,
+        docReceptor,
+        receptorDenomination,
+        changeType,
         currency,
-        impNetoGrabado,
-        impNetoNoGrabado,
+        taxNet,
+        noTaxNet,
         impOpExentas,
         iva,
-        totalAmount
+        total,
+        fileType,
+        receiptType
     }) {
         return new Promise((resolve, reject) => {
             db.serialize(() => {
-                const stmt = db.prepare("INSERT INTO client_record (composed_id,client_cuit, record_date,type,record_type,number_from,number_to,currency,imp_neto_grabado,imp_neto_no_grabado,imp_op_exentas,iva,total_amount) values (?,?,?,?,?,?,?,?,?,?,?,?)")
-                    stmt.run([composedId, clientCuit, date, type, recordType, numberFrom, numberTo, currency, impNetoGrabado, impNetoNoGrabado, impOpExentas, iva, totalAmount], (err) => {
+                const stmt = db.prepare("INSERT INTO client_record (composed_id,client_cuit,record_date,sell_point,number_from,number_to,auth_cod, type_receptorCode, doc_receptor, receptor_denomination, change_type, currency,imp_neto_grabado,imp_neto_no_grabado,imp_op_exentas,iva,total_amount, type, receipt_type) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
+                    stmt.run([composedId, clientCuit, date, sellPoint, numberFrom, numberTo, authCod,typeReceptorCode, docReceptor, receptorDenomination, changeType, currency, taxNet, noTaxNet, impOpExentas, iva, total, fileType, receiptType], (err) => {
                         if (err) {
                             reject(err)
                         }

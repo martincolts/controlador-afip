@@ -2,6 +2,9 @@ import * as React from "react";
 import { Modal, Box, Stack, Button } from "@mui/material";
 import { AFIPRecordRow } from "../../model/record";
 import DataTable from "./Table";
+import { ElectronContext } from "../../Context";
+import Actions from "../../Actions";
+import { useGetClient } from "../../Hooks/currentClientStore";
 
 const style = {
   position: "absolute" as "absolute",
@@ -27,6 +30,17 @@ const ModalLoader: React.FC<ModalLoaderProps> = ({
   isModalOpen,
   closeModal,
 }) => {
+
+  const electronAPI = React.useContext(ElectronContext)
+  const clientCuit = useGetClient()
+  const onSave = async () => {
+   const toInsert = afipRecordRows.map((row) => { return {clientCuit: clientCuit, ...row}})
+    const response = await electronAPI.invokeBackend('synchronous-message', {action: Actions.CREATE_RECORDS, payload: toInsert})
+    console.log(response)
+    closeModal()
+  }
+
+
   return (
     <Modal open={isModalOpen} onClose={closeModal}>
       <Box sx={style}>
@@ -37,7 +51,7 @@ const ModalLoader: React.FC<ModalLoaderProps> = ({
           <Button variant="contained" color="success">
             Agregar datos a la base
           </Button>
-          <Button onClick={closeModal} variant="contained" color="error">
+          <Button onClick={onSave} variant="contained" color="error">
             Cancelar
           </Button>
         </Stack>
