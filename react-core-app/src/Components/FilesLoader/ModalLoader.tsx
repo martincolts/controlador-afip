@@ -5,6 +5,8 @@ import DataTable from "./Table";
 import { ElectronContext } from "../../Context";
 import Actions from "../../Actions";
 import { useGetClient } from "../../Hooks/currentClientStore";
+import useInsertRecords from "../../Hooks/QueryHooks/useInsertRecords";
+import { toast } from "react-toastify";
 
 const style = {
   position: "absolute" as "absolute",
@@ -31,13 +33,18 @@ const ModalLoader: React.FC<ModalLoaderProps> = ({
   closeModal,
 }) => {
 
-  const electronAPI = React.useContext(ElectronContext)
-  const clientCuit = useGetClient()
+  const insertRecords = useInsertRecords() 
   const onSave = async () => {
-   const toInsert = afipRecordRows.map((row) => { return {clientCuit: clientCuit, ...row}})
-    const response = await electronAPI.invokeBackend('synchronous-message', {action: Actions.CREATE_RECORDS, payload: toInsert})
-    console.log(response)
-    closeModal()
+
+
+    insertRecords.mutateAsync(afipRecordRows).then(data => {
+      toast.success("Data insertada correctamente")
+      closeModal()
+    }).catch(err => {
+      toast.error(`Also salio mal ${err}`)
+      console.log(err)
+    })
+    
   }
 
 
@@ -48,10 +55,10 @@ const ModalLoader: React.FC<ModalLoaderProps> = ({
           <DataTable values={afipRecordRows} />
         </Box>
         <Stack direction={"row"} spacing={2} padding={2} justifyContent={"space-around"}>
-          <Button variant="contained" color="success">
+          <Button onClick={onSave} variant="contained" color="success">
             Agregar datos a la base
           </Button>
-          <Button onClick={onSave} variant="contained" color="error">
+          <Button onClick={closeModal} variant="contained" color="error">
             Cancelar
           </Button>
         </Stack>
