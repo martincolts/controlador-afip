@@ -22,7 +22,14 @@ class EventController {
                 return await this.clientService.insertClient(payload)
             case actions.LIST_CLIENTS:
                 return await this.clientService.listClients()
+            case actions.LIST_GASTOS_BY_DATES:
+                return await this.clientService.selectGastosByDates(payload)
+            case actions.LIST_VENTAS_BY_DATES:
+                return await this.clientService.selectVentasByDates(payload)
+
         }
+
+        
     }
 }
 

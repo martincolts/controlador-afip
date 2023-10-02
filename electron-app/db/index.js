@@ -96,6 +96,32 @@ class DBRepository {
         })
     }
 
+    selectGastosBetweenDates(dateFrom, dateTo, cuit) {
+        return new Promise((resolve, reject) => {
+            db.serialize(() => {
+                db.all("select * from client_record where date(record_date) between date(?) and date(?) and type = 'Gasto' and client_cuit = ?;", [dateFrom, dateTo, cuit], (err, rows) => {
+                    if (err) {
+                        reject(err)
+                    }
+                    resolve(rows)
+                })
+            })
+        })
+    }
+
+    selectVentasBetweenDates(dateFrom, dateTo, cuit) {
+        return new Promise((resolve, reject) => {
+            db.serialize(() => {
+                db.all("select * from client_record where date(record_date) between date(?) and date(?) and type = 'Venta' and client_cuit = ?;", [dateFrom, dateTo, cuit], (err, rows) => {
+                    if (err) {
+                        reject(err)
+                    }
+                    resolve(rows)
+                })
+            })
+        })
+    }
+
     selectRecordsByClientCuit(clientCuit) {
         return new Promise((resolve, reject) => {
             db.serialize(() => {

@@ -20,6 +20,14 @@ class RecordService {
         return await this.dbRepository.selectRecordsBetweenDates(dateFrom, dateTo)
     }
 
+    async selectGastosByDates(dateFrom, dateTo, cuit) {
+        return await this.dbRepository.selectGastosBetweenDates(dateFrom, dateTo, cuit)
+    }
+
+    async selectVentasByDates(dateFrom, dateTo, cuit) {
+        return await this.dbRepository.selectGastosBetweenDates(dateFrom, dateTo, cuit)
+    }
+
     async selectByClientCuit(clientCuit) {
         return await this.dbRepository.selectRecordsByClientCuit(clientCuit)
     }

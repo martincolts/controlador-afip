@@ -35,8 +35,6 @@ const ModalLoader: React.FC<ModalLoaderProps> = ({
 
   const insertRecords = useInsertRecords() 
   const onSave = async () => {
-
-
     insertRecords.mutateAsync(afipRecordRows).then(data => {
       toast.success("Data insertada correctamente")
       closeModal()
