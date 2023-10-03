@@ -8,8 +8,8 @@ import CreateClientForm from './Components/ClientManager/CreateClientForm';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ClientList from './Components/ClientManager/ClientList';
 import ClientManager from './Components/ClientManager';
+import useGetGastosByDate from './Hooks/QueryHooks/useGetGastosByDate';
 
-const queryClient = new QueryClient()
 
 function App() {
   //const electronAPI = React.useContext(ElectronContext)
@@ -18,9 +18,12 @@ function App() {
   //   console.log(response)
   // }
 
+  
+  const gastos = useGetGastosByDate("2021-10-10", "2023-10-10") 
+  console.log("gastos.data", gastos.data)
   return (
 
-    <QueryClientProvider client={queryClient}>
+
       <Grid container spacing={1}>
         <Grid item xs={2}>
           <ClientManager />
@@ -31,7 +34,6 @@ function App() {
         </Grid>
        
       </Grid>
-    </QueryClientProvider>
   );
 }
 

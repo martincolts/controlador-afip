@@ -15,7 +15,6 @@ class EventController {
                     await this.recordService.insertRecord(record)
                 }
                 return true
-                break
             case actions.FILTER_RECORDS_BY_CLIENT_CUIT:
                 return await this.recordService.selectById(payload.clientCuit)
             case actions.CREATE_CLIENT:
@@ -23,9 +22,9 @@ class EventController {
             case actions.LIST_CLIENTS:
                 return await this.clientService.listClients()
             case actions.LIST_GASTOS_BY_DATES:
-                return await this.clientService.selectGastosByDates(payload)
+                return await this.recordService.selectGastosByDates(payload)
             case actions.LIST_VENTAS_BY_DATES:
-                return await this.clientService.selectVentasByDates(payload)
+                return await this.recordService.selectVentasByDates(payload)
 
         }
 
