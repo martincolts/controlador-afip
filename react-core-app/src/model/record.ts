@@ -1,5 +1,7 @@
 export type AFIPRecordRow = {
-    clientCuit? :string,
+    id?: number
+    composedId?: string
+    clientCuit? :string
     date: string
     receiptType: string
     sellPoint: string
@@ -16,10 +18,12 @@ export type AFIPRecordRow = {
     impOpExentas: number
     iva: number
     total: number
-    fileType: string
+    fileType: string,
+    recordDate?: Date,
+    recordStringDate?: string, // format YYYY-MM-DD
 }
 
-const ParseToRow = (data: any[]): AFIPRecordRow => {
+const ParseToData = (data: any[]): AFIPRecordRow => {
     return {
         date: data[0],
         receiptType: data[1],
@@ -41,6 +45,43 @@ const ParseToRow = (data: any[]): AFIPRecordRow => {
 }
 
 
+
+const MapFromService = (row: any): AFIPRecordRow => {
+    return {
+        authCod: row.auth_code,
+        changeType: row.change_type,
+        clientCuit: row.client_cuit,
+        composedId: row.composed_id,
+        currency: row.currency,
+        docReceptor: row.doc_receptor,
+        id: row.id,
+        taxNet: row.imp_neto_grabado,
+        noTaxNet: row.imp_neto_no_grabado,
+        impOpExentas: row.imp_op_exentas,
+        iva: row.iva,
+        numberFrom: row.number_from,
+        numberTo: row.number_to,
+        receiptType: row.receipt_from,
+        receptorDenomination: row.receptor_denomination,
+        recordDate: formatDate(row.record_date),
+        sellPoint: row.sell_point,
+        total: row.total_amount,
+        typeReceptorCode: row.type_receptorCode,
+        fileType: row.type,
+        recordStringDate: formatMonth(row.record_date),
+    } as AFIPRecordRow
+}
+
+const formatDate = (stringDate: string): Date => {
+    return new Date(stringDate)
+}
+
+const formatMonth = (stringDate: string): string => {
+    const extracted = stringDate.split('-')
+    return `${extracted[0]}-${extracted[1]}`
+}
+
 export {
-    ParseToRow as ParseToData
+    ParseToData,
+    MapFromService
 }

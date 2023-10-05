@@ -9,18 +9,13 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ClientList from './Components/ClientManager/ClientList';
 import ClientManager from './Components/ClientManager';
 import useGetGastosByDate from './Hooks/QueryHooks/useGetGastosByDate';
+import useGroupAmountByMonth from './Hooks/ProcessorHooks/useGroupAmountByMonth';
+import LinealHorizontal from './Components/Charts/LinealHorizontalChart';
 
 
 function App() {
-  //const electronAPI = React.useContext(ElectronContext)
-  // const sendMessage = async () => {
-  //   const response = await electronAPI.invokeBackend('synchronous-message', { action: 'hi', payload: 'dsfdsf' })
-  //   console.log(response)
-  // }
 
-  
-  const gastos = useGetGastosByDate("2021-10-10", "2023-10-10") 
-  console.log("gastos.data", gastos.data)
+
   return (
 
 
@@ -30,6 +25,7 @@ function App() {
         </Grid>
         <Grid item xs={10}>
           <Loader />
+          <LinealHorizontal></LinealHorizontal>
           {/* <Button onClick={sendMessage}>Send message</Button> */}
         </Grid>
        

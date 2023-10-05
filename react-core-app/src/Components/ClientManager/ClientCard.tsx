@@ -16,7 +16,6 @@ const ClientCard:React.FC<ClientCardProps> = ({ client }) => {
     const selectClient = (clientId: string) => {
         setClient(clientId)
         notify(clientId)
-        console.log(clientId)
     }
 
     return <Card sx={{ minWidth: 275, minHeight: 125 }} onClick={() => selectClient(client.dni)} variant='outlined'>

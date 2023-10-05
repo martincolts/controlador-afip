@@ -17,6 +17,8 @@ function useInsertRecords() {
         },
         onSuccess: () => {
             queryClient.invalidateQueries(['records', clientCuit])
+            queryClient.invalidateQueries(['gastos', clientCuit])
+            queryClient.invalidateQueries(['ventas', clientCuit])
         }
     })
 
