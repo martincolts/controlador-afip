@@ -6,10 +6,10 @@ import { MapFromService } from "../../model/record";
 
 function useGetGastosByDate(from, to: string) { // format
     const electronAPI = React.useContext(ElectronContext)
-
+    
     const clientId = useGetClient()
     const query = useQuery({
-        queryKey: ["gastos", clientId],
+        queryKey: ["gastos", clientId, from, to],
         queryFn: async () => {
             const result = await electronAPI.invokeBackend('synchronous-message', {
                 action: actions.LIST_GASTOS_BY_DATES,

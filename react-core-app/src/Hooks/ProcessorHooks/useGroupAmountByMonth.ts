@@ -3,7 +3,6 @@ import _  from "lodash"
 
 const useGroupAmountByMonth = (rows: AFIPRecordRow[], numericAttribute: string) => {
     const groupedByDate = _.groupBy(rows, ( record )=> record.recordStringDate)
-    console.log(groupedByDate)
 
     let result = {}
     const keys = Object.keys(groupedByDate)

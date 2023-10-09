@@ -12,6 +12,7 @@ import { Bar } from 'react-chartjs-2';
 import useGroupAmountByMonth from '../../Hooks/ProcessorHooks/useGroupAmountByMonth';
 import useGetGastosByDate from '../../Hooks/QueryHooks/useGetGastosByDate';
 import useGetVentasByDate from '../../Hooks/QueryHooks/useGetVentasByDate';
+import { useGetDateFromString, useGetDateToString } from '../../Hooks/dateSelectorStore';
 
 // ts-ignore
 ChartJS.register(
@@ -38,18 +39,19 @@ export const options = {
 
 const LinealHorizontal: React.FC = () => {
 
-    const gastos = useGetGastosByDate('2021-01-01', '2023-10-10')
-    console.log('gastos raw', gastos.data)
+    const dateFrom = useGetDateFromString()
+    const dateTo = useGetDateToString()
+
+    const gastos = useGetGastosByDate(dateFrom, dateTo)
+    
     const grouped = useGroupAmountByMonth(gastos.data, 'total')
-    const ventas = useGetVentasByDate('2021-01-01', '2023-10-10')
-    console.log('ventas raw', ventas.data)
+    const ventas = useGetVentasByDate(dateFrom, dateTo)
+
     const ventasGrouped = useGroupAmountByMonth(ventas.data, 'total')
 
     const labels = Object.keys(grouped)
     const chartData = Object.values(grouped)
 
-    console.log('gastos', grouped)
-    console.log('ventas', ventasGrouped)
     const ventasChartData = Object.values(ventasGrouped)
 
     return <Bar options={options} data={{

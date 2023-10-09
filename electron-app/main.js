@@ -25,7 +25,7 @@ function createWindow() {
   })
 
   win.setMenu(null)
-
+ 
   if (isDev) {
     win.loadURL('http://localhost:3000')
     win.webContents.openDevTools({ mode: 'detach' })

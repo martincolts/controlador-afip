@@ -9,7 +9,7 @@ function useGetVentasByDate(from, to: string) { // format
 
     const clientId = useGetClient()
     const query = useQuery({
-        queryKey: ["ventas", clientId],
+        queryKey: ["ventas", clientId, from, to],
         queryFn: async () => {
             const result = await electronAPI.invokeBackend('synchronous-message', {
                 action: actions.LIST_VENTAS_BY_DATES,

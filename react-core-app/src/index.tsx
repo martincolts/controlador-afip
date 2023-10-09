@@ -7,6 +7,8 @@ import { ElectronContext } from './Context';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,11 +18,13 @@ const queryClient = new QueryClient()
 root.render(
   <React.StrictMode>
         <QueryClientProvider client={queryClient}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
     {//@ts-ignore    
       <ElectronContext.Provider value={window.API}>
         <ToastContainer/>
         <App />
       </ElectronContext.Provider>}
+      </LocalizationProvider>
       </QueryClientProvider>
   </React.StrictMode>
 );
