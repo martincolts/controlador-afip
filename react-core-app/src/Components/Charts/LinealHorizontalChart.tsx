@@ -1,4 +1,5 @@
 import * as React from 'react';
+import _ from 'lodash'
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -49,22 +50,38 @@ const LinealHorizontal: React.FC = () => {
 
     const ventasGrouped = useGroupAmountByMonth(ventas.data, 'total')
 
-    const labels = Object.keys(grouped)
+    console.log('gastos', grouped)
+    console.log('venta', ventasGrouped)
+
+
+    const gastosLabels = Object.keys(grouped)
+    const ventasLabels = Object.keys(ventasGrouped)
+
+    const labels = _.union(gastosLabels, ventasLabels)
+
+    const gastosToChart = labels.map(label => {
+        return grouped[label] ? grouped[label] : 0.0
+    })
     const chartData = Object.values(grouped)
 
-    const ventasChartData = Object.values(ventasGrouped)
+    const ventasToChard = labels.map(label => {
+        return ventasGrouped[label] ? ventasGrouped[label] : 0.0
+    })
+
+    console.log('gastosToChart', gastosToChart)
+    console.log('ventasToChard', ventasToChard)
 
     return <Bar options={options} data={{
         labels,
         datasets: [
             {
             label: 'Gastos',
-            data: chartData,
+            data: gastosToChart,
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
             {
                 label: 'Ventas',
-                data: ventasChartData,
+                data: ventasToChard,
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
                 }
         ]
