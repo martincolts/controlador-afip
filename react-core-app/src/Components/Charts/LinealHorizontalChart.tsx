@@ -33,7 +33,7 @@ export const options = {
         },
         title: {
             display: true,
-            text: 'Chart.js Bar Chart',
+            text: 'Gastos por mes',
         },
     },
 };
@@ -50,8 +50,6 @@ const LinealHorizontal: React.FC = () => {
 
     const ventasGrouped = useGroupAmountByMonth(ventas.data, 'total')
 
-    console.log('gastos', grouped)
-    console.log('venta', ventasGrouped)
 
 
     const gastosLabels = Object.keys(grouped)
@@ -59,17 +57,33 @@ const LinealHorizontal: React.FC = () => {
 
     const labels = _.union(gastosLabels, ventasLabels)
 
+    labels.sort((a: string, b: string) => {
+        const aYear = parseInt(a.split('-')[0])
+        const aMonth = parseInt(a.split('-')[1])
+        const bYear = parseInt(b.split('-')[0])
+        const bMonth = parseInt(b.split('-')[1])
+
+        if (aYear > bYear) {
+            return 1
+        } else if (aYear < bYear) {
+            return -1
+        } else if (aMonth > bMonth) {
+            return 1
+        } else if (aMonth < bMonth) {
+            return -1
+        } else {
+            return 0
+        }
+        
+    })
+
     const gastosToChart = labels.map(label => {
         return grouped[label] ? grouped[label] : 0.0
     })
-    const chartData = Object.values(grouped)
 
     const ventasToChard = labels.map(label => {
         return ventasGrouped[label] ? ventasGrouped[label] : 0.0
     })
-
-    console.log('gastosToChart', gastosToChart)
-    console.log('ventasToChard', ventasToChard)
 
     return <Bar options={options} data={{
         labels,

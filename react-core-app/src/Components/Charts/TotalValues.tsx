@@ -21,7 +21,7 @@ const TotalValues: React.FC = () => {
      }
      console.log(currencyFormat(2665))
 
-    return <Stack direction={'row'} spacing={2}>
+    return <Stack direction={'column'} spacing={2}>
         <Typography>Gastos totales: {currencyFormat(gastosTotal)}</Typography>
         <Typography>Ventas totales: {currencyFormat(ventasTotal)}</Typography>
     </Stack>
