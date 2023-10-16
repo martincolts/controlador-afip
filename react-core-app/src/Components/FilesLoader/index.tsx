@@ -78,22 +78,8 @@ function Loader() {
               Cargar Archivos CSV
             </Button>
           </label>
-          {/* <Button color="primary" variant="contained" onClick={clear}>
-            Borrar Todo
-          </Button> */}
-         
-          {/* <Button color="primary" variant="contained" onClick={show}>Mostrar</Button> */}
         </Stack>
-        {/* <Grid container width={"100%"}>
-          <Grid item xs={6}>
-            <DataTable values={filesData} />
-          </Grid>
-          <Grid item xs={6}>
-            <Info values={filesData} />
-          </Grid>
-        </Grid> */}
-
-        <ModalLoader afipRecordRows={filesData} closeModal={closeModal} isModalOpen={modalOpen} setFilesData={setFilesData}></ModalLoader>
+        <ModalLoader afipRecordRows={filesData} closeModal={closeModal} isModalOpen={modalOpen}></ModalLoader>
       </Grid>
     </Grid>
   );

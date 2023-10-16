@@ -22,25 +22,29 @@ interface ModalLoaderProps {
   afipRecordRows: AFIPRecordRow[];
   isModalOpen: boolean;
   closeModal: () => void;
-  setFilesData: any;
 }
 
 const ModalLoader: React.FC<ModalLoaderProps> = ({
   afipRecordRows,
   isModalOpen,
-  closeModal,
-  setFilesData
+  closeModal
 }) => {
+
+  const [rows, setRows] = React.useState<AFIPRecordRow[]>(afipRecordRows)
+
+  React.useEffect(() => {
+    setRows(afipRecordRows)
+  }, [afipRecordRows, setRows])
 
   const insertRecords = useInsertRecords() 
   const onSave = async () => {
-    insertRecords.mutateAsync(afipRecordRows).then((data: AFIPRecordRow[]) => {
-      if (data.length == 0) {
+    insertRecords.mutateAsync(rows).then((data: AFIPRecordRow[]) => {
+      if (!hasIncorrectInserts(data)) {
         toast.success("Data insertada correctamente")
         closeModal()
       } else {
-        toast.error("ALgunos records fueron insertados, otros no porque anteriormente fueron insertados, en rojo se marcan cuales son.")
-        setFilesData(data)
+        toast.error("Algunos records fueron insertados, otros no porque anteriormente fueron insertados, en rojo se marcan cuales son.")
+        setRows(data)
       }
     })
   }
@@ -50,7 +54,7 @@ const ModalLoader: React.FC<ModalLoaderProps> = ({
     <Modal open={isModalOpen} onClose={closeModal}>
       <Box sx={style}>
         <Box sx={{ overflow: "auto", maxHeight: 500 }}>
-          <DataTable values={afipRecordRows} />
+          <DataTable values={rows} />
         </Box>
         <Stack direction={"row"} spacing={2} padding={2} justifyContent={"space-around"}>
           <Button onClick={onSave} variant="contained" color="success">
@@ -64,5 +68,14 @@ const ModalLoader: React.FC<ModalLoaderProps> = ({
     </Modal>
   );
 };
+
+const hasIncorrectInserts = (rows: AFIPRecordRow[]): boolean => {
+  for( const row of rows) {
+    if (row.correct === false) {
+      return true
+    }
+  }
+  return false
+}
 
 export default ModalLoader;
