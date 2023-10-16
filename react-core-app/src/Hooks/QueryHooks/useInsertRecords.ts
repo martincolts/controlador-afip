@@ -13,7 +13,16 @@ function useInsertRecords() {
     const mutation = useMutation({
         mutationFn: async (afipRecordRows: AFIPRecordRow[]) => {
             const toInsert = afipRecordRows.map((row) => { return { clientCuit: clientCuit, ...row } })
-            return await electronAPI.invokeBackend('synchronous-message', { action: actions.CREATE_RECORDS, payload: toInsert })
+            const result = await electronAPI.invokeBackend('synchronous-message', { action: actions.CREATE_RECORDS, payload: toInsert })
+            return toInsert.map(row => {
+                if (belongs(row, result)) {
+                    return { ...row, correct: false }
+                } else {
+                    return {
+                        ...row, correct: true
+                    }
+                }
+            })
         },
         onSuccess: () => {
             queryClient.invalidateQueries(['records', clientCuit])
@@ -24,6 +33,15 @@ function useInsertRecords() {
 
     return mutation
 
+}
+
+function belongs(row: AFIPRecordRow, indexes: number[]): boolean {
+    for (const index of indexes) {
+        if (row.index === index) {
+            return true
+        }
+    }
+    return false
 }
 
 export default useInsertRecords

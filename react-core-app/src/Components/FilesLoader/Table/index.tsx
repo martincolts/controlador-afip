@@ -4,9 +4,9 @@ import columns from './columns'
 import { AFIPRecordRow } from '../../../model/record'
 
 interface DataTableProps {
-    
     values: AFIPRecordRow[]
 }
+
 const DataTable: React.FC<DataTableProps> = ({  values }) => {
   const table = useReactTable({
     data: values,
@@ -35,9 +35,9 @@ const DataTable: React.FC<DataTableProps> = ({  values }) => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map(row => (
-            <tr key={row.id}>
+            <tr key={row.id} style={row.original.correct == false ? {backgroundColor: 'red'} : {}}>
               {row.getVisibleCells().map(cell => (
-                <td key={cell.id}>
+                <td key={cell.id} >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

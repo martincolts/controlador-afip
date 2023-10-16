@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Button, Stack, Typography, Chip, Box } from "@mui/material";
-import DataTable from "./Table";
 import Grid from "@mui/material/Grid";
-import Info from "../Info";
-import { AFIPRecordRow, ParseToData } from "../../model/record";
+import { AFIPRecordRow, ParseToData } from '../../model/record';
 import Papa, { ParseResult } from "papaparse"
 import { useClientIsSelected, useGetClient } from "../../Hooks/currentClientStore";
 import ModalLoader from "./ModalLoader";
@@ -28,9 +26,6 @@ function Loader() {
     openModal();
   };
 
-  const clear = () => {
-    setFilesData([]);
-  };
 
   const loadingFilesHandler = (event: any): Promise<AFIPRecordRow[]> => {
     return new Promise(async (resolve, reject) => {
@@ -56,7 +51,8 @@ function Loader() {
       for (const result of results) {
         valuesArray = [...valuesArray, ...result]
       }
-      resolve(valuesArray)
+      
+      resolve(valuesArray.map((val: AFIPRecordRow, i: number) => ({index: i, ...val})))
     })
   };
 
@@ -97,7 +93,7 @@ function Loader() {
           </Grid>
         </Grid> */}
 
-        <ModalLoader afipRecordRows={filesData} closeModal={closeModal} isModalOpen={modalOpen}></ModalLoader>
+        <ModalLoader afipRecordRows={filesData} closeModal={closeModal} isModalOpen={modalOpen} setFilesData={setFilesData}></ModalLoader>
       </Grid>
     </Grid>
   );

@@ -14,6 +14,19 @@ class RecordService {
         return await this.dbRepository.insertRecord(record)
     }
 
+    async insertRecords(records) {
+        const recordsWithErrors = []
+        for (const record of records) {
+            try {
+                await this.insertRecord(record)
+            } catch (e) {
+                console.log('erro entonces tiene q agregar el index al array', e)
+                recordsWithErrors.push(record.index)
+            }
+        }
+        return recordsWithErrors
+    }
+
     async selectById(id) {
         return await this.dbRepository.selectRecordById(id)
     }

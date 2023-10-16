@@ -21,6 +21,8 @@ export type AFIPRecordRow = {
     fileType: string,
     recordDate?: Date,
     recordStringDate?: string, // format YYYY-MM-DD
+    correct?: boolean; // true was inserted correctly / false it was not inserted correctly
+    index?: number;
 }
 
 const ParseToData = (data: any[]): AFIPRecordRow => {

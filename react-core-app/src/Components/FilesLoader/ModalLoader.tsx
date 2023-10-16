@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Modal, Box, Stack, Button } from "@mui/material";
-import { AFIPRecordRow } from "../../model/record";
+import { AFIPRecordRow } from '../../model/record';
 import DataTable from "./Table";
 import useInsertRecords from "../../Hooks/QueryHooks/useInsertRecords";
 import { toast } from "react-toastify";
@@ -22,24 +22,27 @@ interface ModalLoaderProps {
   afipRecordRows: AFIPRecordRow[];
   isModalOpen: boolean;
   closeModal: () => void;
+  setFilesData: any;
 }
 
 const ModalLoader: React.FC<ModalLoaderProps> = ({
   afipRecordRows,
   isModalOpen,
   closeModal,
+  setFilesData
 }) => {
 
   const insertRecords = useInsertRecords() 
   const onSave = async () => {
-    insertRecords.mutateAsync(afipRecordRows).then(data => {
-      toast.success("Data insertada correctamente")
-      closeModal()
-    }).catch(err => {
-      toast.error(`Also salio mal ${err}`)
-      console.log(err)
+    insertRecords.mutateAsync(afipRecordRows).then((data: AFIPRecordRow[]) => {
+      if (data.length == 0) {
+        toast.success("Data insertada correctamente")
+        closeModal()
+      } else {
+        toast.error("ALgunos records fueron insertados, otros no porque anteriormente fueron insertados, en rojo se marcan cuales son.")
+        setFilesData(data)
+      }
     })
-    
   }
 
 
