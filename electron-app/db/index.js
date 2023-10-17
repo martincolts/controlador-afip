@@ -1,4 +1,4 @@
-const sqlite3 = require('sqlite3').verbose();
+const sqlite3 = require('sqlite3');
 const db = new sqlite3.Database('db.db');
 const migrations = require('./migrations.js')
 

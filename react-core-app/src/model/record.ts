@@ -27,7 +27,7 @@ export type AFIPRecordRow = {
 
 const ParseToData = (data: any[]): AFIPRecordRow => {
     return {
-        date: data[0],
+        date: correctDate(data[0]),
         receiptType: data[1],
         sellPoint: data[2],
         numberFrom: data[3],
@@ -40,13 +40,11 @@ const ParseToData = (data: any[]): AFIPRecordRow => {
         currency: data[10],
         taxNet: parseFloat(data[11]) || 0.0,
         noTaxNet: parseFloat(data[12]) || 0.0,
-        impOpExentas: parseFloat(data[13]) || 0.0,
-        iva: parseFloat(data[14]) || 0.0,
-        total: parseFloat(data[15]) || 0.0,
+        impOpExentas: parseFloat(data[13]) || 0.0, // otros tributos es [14]
+        iva: parseFloat(data[15]) || 0.0,
+        total: parseFloat(data[16]) || 0.0,
     } as AFIPRecordRow;
 }
-
-
 
 const MapFromService = (row: any): AFIPRecordRow => {
     return {
@@ -81,6 +79,11 @@ const formatDate = (stringDate: string): Date => {
 const formatMonth = (stringDate: string): string => {
     const extracted = stringDate.split('-')
     return `${extracted[0]}-${extracted[1]}`
+}
+
+const correctDate = (stringDate: string): string => {
+    const extracted = stringDate.split('-')
+    return `${extracted[2]}-${extracted[1]}-${extracted[0]}`
 }
 
 export {
