@@ -26,9 +26,10 @@ export type AFIPRecordRow = {
 }
 
 const ParseToData = (data: any[]): AFIPRecordRow => {
+    const receiptType = data[1]
     return {
         date: correctDate(data[0]),
-        receiptType: data[1],
+        receiptType,
         sellPoint: data[2],
         numberFrom: data[3],
         numberTo: data[4],
@@ -38,12 +39,17 @@ const ParseToData = (data: any[]): AFIPRecordRow => {
         receptorDenomination: data[8],
         changeType: data[9],
         currency: data[10],
-        taxNet: parseFloat(data[11]) || 0.0,
-        noTaxNet: parseFloat(data[12]) || 0.0,
-        impOpExentas: parseFloat(data[13]) || 0.0, // otros tributos es [14]
-        iva: parseFloat(data[15]) || 0.0,
-        total: parseFloat(data[16]) || 0.0,
+        taxNet: parseImporte(data[11], receiptType),
+        noTaxNet: parseImporte(data[12], receiptType),
+        impOpExentas: parseImporte(data[13], receiptType) || 0.0, // otros tributos es [14]
+        iva: parseImporte(data[15], receiptType),
+        total: parseImporte(data[16], receiptType),
     } as AFIPRecordRow;
+}
+
+const parseImporte = (importe: string, receiptType: string): number => {
+    const float = parseFloat(importe.replace(',', '.')) || 0.0
+    return isNotaDeCredito(receiptType) ? -1 * float : float
 }
 
 const MapFromService = (row: any): AFIPRecordRow => {
@@ -84,6 +90,12 @@ const formatMonth = (stringDate: string): string => {
 const correctDate = (stringDate: string): string => {
     const extracted = stringDate.split('-')
     return `${extracted[2]}-${extracted[1]}-${extracted[0]}`
+}
+
+const codes = ["2","3","7","8","12","13","20","21","37","38","52","53"]
+
+const isNotaDeCredito = (code: string) => {
+    return codes.includes(code)
 }
 
 export {

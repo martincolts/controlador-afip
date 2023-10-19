@@ -1,6 +1,6 @@
 {
   "name": "electron-app",
-  "version": "1.0.0",
+  "version": "0.9.1",
   "description": "App to control clients",
   "main": "main.js",
   "scripts": {
