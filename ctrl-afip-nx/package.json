@@ -1,7 +1,0 @@
-{
-  "devDependencies": {
-    "@nx/jest": "^16.10.0",
-    "@nx/linter": "^16.10.0",
-    "nx-electron": "^16.0.0"
-  }
-}

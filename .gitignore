@@ -24,3 +24,45 @@ yarn-debug.log*
 yarn-error.log*
 
 /**/*.db
+
+
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+v2/dist
+v2/tmp
+v2/out-tsc
+
+# dependencies
+v2/node_modules
+
+# IDEs and editors
+v2/.idea
+v2/.project
+v2/.classpath
+v2/.c9/
+v2/*.launch
+v2/.settings/
+v2/*.sublime-workspace
+
+# IDE - VSCode
+v2/.vscode/*
+v2/!.vscode/settings.json
+v2/!.vscode/tasks.json
+v2/!.vscode/launch.json
+v2/!.vscode/extensions.json
+
+# misc
+v2/.sass-cache
+v2/connect.lock
+v2/coverage
+v2/libpeerconnection.log
+v2/npm-debug.log
+v2/yarn-error.log
+v2/testem.log
+v2/typings
+
+# System Files
+.DS_Store
+Thumbs.db
