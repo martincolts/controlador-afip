@@ -9,6 +9,11 @@
 
 To start the development server run `nx serve ctrl-react-app`. Open your browser and navigate to http://localhost:4200/. Happy coding!
 
+## Make electron APP
+
+run npm exec ....
+like npm exec nx run ctrl-electron-app:make
+
 
 ## Generate code
 
