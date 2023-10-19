@@ -1,0 +1,75 @@
+{
+  "name": "ctrl-react-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/ctrl-react-app/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/ctrl-react-app"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development",
+          "baseHref": "./"
+        },
+        "production": {
+          "mode": "production",
+          "baseHref": "./"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "ctrl-react-app:build",
+        "proxyConfig": "apps/ctrl-react-app/proxy.conf.json"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "ctrl-react-app:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "ctrl-react-app:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "preview": {
+      "executor": "@nx/vite:preview-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "ctrl-react-app:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "ctrl-react-app:build:development"
+        },
+        "production": {
+          "buildTarget": "ctrl-react-app:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/apps/ctrl-react-app"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/ctrl-react-app/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": []
+}
