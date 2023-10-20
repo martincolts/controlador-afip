@@ -2,7 +2,7 @@ import { BrowserWindow, shell, screen } from 'electron';
 import { rendererAppName, rendererAppPort } from './constants';
 import { environment } from '../environments/environment';
 import { join } from 'path';
-import { format } from 'url';
+import * as url from 'url';
 
 export default class App {
   // Keep a global reference of the window object, if you don't, the window will
@@ -16,7 +16,7 @@ export default class App {
     const getFromEnvironment: boolean =
       parseInt(process.env.ELECTRON_IS_DEV, 10) === 1;
 
-    return isEnvironmentSet ? getFromEnvironment : !environment.production;
+    return isEnvironmentSet ? getFromEnvironment : environment.production;
   }
 
   private static onWindowAllClosed() {
@@ -103,7 +103,7 @@ export default class App {
       App.mainWindow.loadURL(`http://localhost:${rendererAppPort}`);
     } else {
       App.mainWindow.loadURL(
-        format({
+        url.format({
           pathname: join(__dirname, '..', rendererAppName, 'index.html'),
           protocol: 'file:',
           slashes: true,
