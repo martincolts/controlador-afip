@@ -9,14 +9,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { ThemeProvider, createTheme } from '@mui/material';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 const queryClient = new QueryClient()
 
+const theme = createTheme({})
+
 root.render(
   <React.StrictMode>
+    <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
     {//@ts-ignore    
@@ -26,6 +30,7 @@ root.render(
       </ElectronContext.Provider>}
       </LocalizationProvider>
       </QueryClientProvider>
+      </ThemeProvider>
   </React.StrictMode>
 );
 
