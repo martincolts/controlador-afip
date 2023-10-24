@@ -3,6 +3,12 @@
   "version": "0.0.0",
   "license": "MIT",
   "productName": "algo",
+  "description": "crtl",
+  "author": {
+    "email": "martin@maiol.com",
+    "name": "martin"
+  },
+  "artifactName": "${productName}-${version}.${ext}",
   "scripts": {},
   "private": true,
   "dependencies": {
@@ -77,5 +83,8 @@
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0"
+  },
+  "build": {
+    "icon": "document-svgrepo-com.svg"
   }
 }
