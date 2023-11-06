@@ -1,4 +1,4 @@
-const { actions } = require('./actions')
+import { actions } from '@v2/model'
 
 class EventController {
     constructor(private recordService, private clientService) {

@@ -14,21 +14,19 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {},
     "strict": false,
-
     "allowJs": true,
-    
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "paths": {
+      "@v2/model": ["libs/model/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

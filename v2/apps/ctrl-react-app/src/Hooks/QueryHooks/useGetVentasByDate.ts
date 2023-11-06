@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useGetClient } from "../currentClientStore";
 import React from "react";
-import { ElectronContext, actions } from "../../Context";
+import { ElectronContext } from "../../Context";
+import { actions } from '@v2/model'
 import { MapFromService } from "../../model/record";
 
 function useGetVentasByDate(from: string, to: string) { // format

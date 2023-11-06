@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { ElectronContext, actions } from '../../Context'
+import { ElectronContext } from '../../Context'
+import { actions } from '@v2/model'
 import { Client } from '../../model/client'
 
 function useListClients() {
