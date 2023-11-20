@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import columns from './columns'
-import { AFIPRecordRow } from '../../../model/record'
+import { AFIPRecordRow } from '@v2/model'
 
 interface DataTableProps {
     values: AFIPRecordRow[]

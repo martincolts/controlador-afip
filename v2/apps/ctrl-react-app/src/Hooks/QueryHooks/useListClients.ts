@@ -1,27 +1,15 @@
 import * as React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { ElectronContext } from '../../Context'
-import { actions } from '@v2/model'
-import { Client } from '../../model/client'
+import { Client, actions } from '@v2/model'
+
 
 function useListClients() {
     const electronAPI = React.useContext(ElectronContext)
     return useQuery({
-        queryKey:['clients'],
+        queryKey:['clients'] as const,
         queryFn: async() => {
-            const rows = await electronAPI.invokeBackend('synchronous-message', {action: actions.LIST_CLIENTS, payload:{}})
-            const clients = rows.map((row: any) => {
-                return {
-                    id: row.id,
-                    cuit: row.cuit,
-                    firstName: row.first_name,
-                    lastName: row.last_name,
-                    dni: row.dni,
-                    email: row.email,
-                    phone: row.phone
-                } as Client
-            })
-           return clients
+            return await electronAPI.invokeBackend<Client[]>('synchronous-message', {action: actions.LIST_CLIENTS, payload:{}})
         }
     })
 }

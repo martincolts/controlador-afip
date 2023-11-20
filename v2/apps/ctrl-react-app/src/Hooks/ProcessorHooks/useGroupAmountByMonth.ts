@@ -1,7 +1,7 @@
-import { AFIPRecordRow } from "../../model/record";
+import { AFIPRecordRow } from "@v2/model"
 import _  from "lodash"
 
-const useGroupAmountByMonth = (rows: AFIPRecordRow[], numericAttribute: string) => {
+const useGroupAmountByMonth = (rows: AFIPRecordRow[] | undefined, numericAttribute: string) => {
     const groupedByDate = _.groupBy(rows, ( record )=> record.recordStringDate)
 
     let result: any = {}

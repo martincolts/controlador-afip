@@ -1,4 +1,4 @@
-export type AFIPRecordRow = {
+export interface AFIPRecordRow {
     id?: number
     composedId?: string
     clientCuit? :string
@@ -52,7 +52,7 @@ const parseImporte = (importe: string, receiptType: string): number => {
     return isNotaDeCredito(receiptType) ? -1 * float : float
 }
 
-const MapFromService = (row: any): AFIPRecordRow => {
+const MapFromRaw = (row: any): AFIPRecordRow => {
     return {
         authCod: row.auth_code,
         changeType: row.change_type,
@@ -78,6 +78,10 @@ const MapFromService = (row: any): AFIPRecordRow => {
     } as AFIPRecordRow
 }
 
+const MapFromRaws = (rows: any[]): AFIPRecordRow[] => {
+    return rows.map(r => MapFromRaw(r))
+}
+
 const formatDate = (stringDate: string): Date => {
     return new Date(stringDate)
 }
@@ -100,5 +104,6 @@ const isNotaDeCredito = (code: string) => {
 
 export {
     ParseToData,
-    MapFromService
+    MapFromRaw,
+    MapFromRaws
 }

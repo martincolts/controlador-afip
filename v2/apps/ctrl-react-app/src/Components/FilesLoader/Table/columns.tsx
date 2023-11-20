@@ -1,7 +1,7 @@
 import { createColumnHelper } from '@tanstack/react-table';
 
 import { currencyFormat } from '../../../Utils';
-import { AFIPRecordRow } from '../../../model/record';
+import { AFIPRecordRow } from '@v2/model';
 
 const columnHelper = createColumnHelper<AFIPRecordRow>()
 

@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { ElectronContext } from '../../Context'
-import { actions } from '@v2/model'
+import { AFIPRecordRow, actions } from '@v2/model'
 import { useGetClient } from '../currentClientStore'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { AFIPRecordRow } from '../../model/record';
 
 function useInsertRecords() {
 
@@ -14,7 +13,7 @@ function useInsertRecords() {
     const mutation = useMutation({
         mutationFn: async (afipRecordRows: AFIPRecordRow[]) => {
             const toInsert = afipRecordRows.map((row) => { return { clientCuit: clientCuit, ...row } })
-            const result = await electronAPI.invokeBackend('synchronous-message', { action: actions.CREATE_RECORDS, payload: toInsert })
+            const result = await electronAPI.invokeBackend<any>('synchronous-message', { action: actions.CREATE_RECORDS, payload: toInsert })
             return toInsert.map(row => {
                 if (belongs(row, result)) {
                     return { ...row, correct: false }

@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Modal, Box, Stack, Button } from "@mui/material";
-import { AFIPRecordRow } from '../../model/record';
 import DataTable from "./Table";
 import useInsertRecords from "../../Hooks/QueryHooks/useInsertRecords";
 import { toast } from "react-toastify";
+import { AFIPRecordRow } from "@v2/model";
 
 const style = {
   position: "absolute" as "absolute",

@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { Card, CardContent, Typography } from "@mui/material"
-import { Client } from "../../model/client"
+
 import { useSetClient } from '../../Hooks/currentClientStore'
 import { toast } from 'react-toastify'
+import { Client } from '@v2/model'
 
 export interface ClientCardProps {
     client: Client

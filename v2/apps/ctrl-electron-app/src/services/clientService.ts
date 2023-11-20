@@ -1,5 +1,7 @@
+import { DBRepository } from "../db"
+
 class ClientService {
-    constructor(private dbRepository) {
+    constructor(private dbRepository: DBRepository) {
         this.dbRepository = dbRepository
     }
 

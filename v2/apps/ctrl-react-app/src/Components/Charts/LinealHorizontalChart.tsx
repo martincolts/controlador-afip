@@ -42,16 +42,10 @@ const LinealHorizontal: React.FC = () => {
 
     const dateFrom = useGetDateFromString()
     const dateTo = useGetDateToString()
-
     const gastos = useGetGastosByDate(dateFrom, dateTo)
-    
     const grouped = useGroupAmountByMonth(gastos.data, 'total')
     const ventas = useGetVentasByDate(dateFrom, dateTo)
-
     const ventasGrouped = useGroupAmountByMonth(ventas.data, 'total')
-
-
-
     const gastosLabels = Object.keys(grouped)
     const ventasLabels = Object.keys(ventasGrouped)
 

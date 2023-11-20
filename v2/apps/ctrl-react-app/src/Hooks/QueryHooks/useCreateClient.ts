@@ -1,9 +1,7 @@
 import * as React from 'react'
 import { ElectronContext } from "../../Context";
-import { actions } from '@v2/model'
+import { Client, actions } from '@v2/model'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { Client } from '../../model/client';
-
 
 function useCreateClient() {
     const electronAPI = React.useContext(ElectronContext)

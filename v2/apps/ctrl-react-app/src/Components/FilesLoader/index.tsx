@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Button, Stack, Typography, Chip, Box } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { AFIPRecordRow, ParseToData } from '../../model/record';
+
 import Papa, { ParseResult } from "papaparse"
 import { useClientIsSelected, useGetClient } from "../../Hooks/currentClientStore";
 import ModalLoader from "./ModalLoader";
+import { AFIPRecordRow, ParseToData } from "@v2/model";
 
 function Loader() {
   const [filesData, setFilesData] = useState<AFIPRecordRow[]>([]);

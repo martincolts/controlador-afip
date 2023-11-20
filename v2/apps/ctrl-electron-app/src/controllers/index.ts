@@ -1,7 +1,9 @@
 import { actions } from '@v2/model'
+import { RecordService } from '../services/recordService'
+import { ClientService } from '../services/clientService'
 
 class EventController {
-    constructor(private recordService, private clientService) {
+    constructor(private recordService: RecordService, private clientService: ClientService) {
         this.recordService = recordService
         this.clientService = clientService
     }

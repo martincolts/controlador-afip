@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Stack } from '@mui/material';
 import { currencyFormat } from "../../Utils";
-import { AFIPRecordRow } from '../../model/record';
+import { AFIPRecordRow } from '@v2/model';
 
 interface InfoProps {
     values: AFIPRecordRow[]

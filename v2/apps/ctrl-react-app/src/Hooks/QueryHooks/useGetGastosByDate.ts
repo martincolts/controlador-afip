@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useGetClient } from "../currentClientStore";
 import React from "react";
 import { ElectronContext } from "../../Context";
-import { actions } from '@v2/model'
-import { MapFromService } from "../../model/record";
+import { AFIPRecordRow , actions } from '@v2/model'
+
 
 function useGetGastosByDate(from: string, to: string) { // format
     const electronAPI = React.useContext(ElectronContext)
@@ -12,7 +12,7 @@ function useGetGastosByDate(from: string, to: string) { // format
     const query = useQuery({
         queryKey: ["gastos", clientId, from, to],
         queryFn: async () => {
-            const result = await electronAPI.invokeBackend('synchronous-message', {
+            const result = await electronAPI.invokeBackend<AFIPRecordRow[]>('synchronous-message', {
                 action: actions.LIST_GASTOS_BY_DATES,
                 payload: {
                     dateFrom: from,
@@ -20,8 +20,7 @@ function useGetGastosByDate(from: string, to: string) { // format
                     cuit: clientId
                 }
             })
-            const data = result.map((r: any) => MapFromService(r))
-            return data
+            return result
         }
     })
 

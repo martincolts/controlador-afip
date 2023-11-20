@@ -92,8 +92,6 @@ const LinealHorizontalAccumulated: React.FC = () => {
     };
   });
 
-  console.log("LABELS GROUPED", labelsWithDate);
-
   const gastosAccumulated: any = [];
   const ventasAccumulated: any = [];
   const catA = [];

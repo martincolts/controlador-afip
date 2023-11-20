@@ -7,10 +7,10 @@ export interface Message {
 
 export interface ElectronAPI {
     sendMessage(channel: string, message: any): Promise<any>;
-    invokeBackend(channel: string, message: Message): Promise<any>;
+    invokeBackend<T>(channel: string, message: Message): Promise<T>;
 }
 
-export const ElectronContext: React.Context<any> = React.createContext(undefined)
+export const ElectronContext: React.Context<ElectronAPI> = React.createContext({} as ElectronAPI)
 
 
 
