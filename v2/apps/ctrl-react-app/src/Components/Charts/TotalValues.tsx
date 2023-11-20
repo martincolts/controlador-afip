@@ -19,7 +19,6 @@ const TotalValues: React.FC = () => {
     function currencyFormat(num: any) {
         return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
      }
-     console.log(currencyFormat(2665))
 
     return <Stack direction={'column'} spacing={2}>
         <Typography>Gastos totales: {currencyFormat(gastosTotal)}</Typography>

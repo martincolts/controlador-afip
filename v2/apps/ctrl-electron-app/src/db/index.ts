@@ -1,6 +1,6 @@
 import { Database } from "sqlite3";
 import { migrations } from './migrations'
-import { AFIPRecordRow, Client, MapFromRaw, MapFromRaws } from "@v2/model";
+import { AFIPRecordRow, Client, mapFromRecordRaw, mapFromRecordRaws, mapFromClientRaws } from "@v2/model";
 
 const db = new Database('db.db');
 
@@ -67,7 +67,7 @@ export class DBRepository {
                     if (err) {
                         reject(err)
                     }
-                    resolve(MapFromRaw(row))
+                    resolve(mapFromRecordRaw(row))
                 })
             })
         })
@@ -80,7 +80,7 @@ export class DBRepository {
                     if (err) {
                         reject(err)
                     }
-                    resolve(MapFromRaw(row))
+                    resolve(mapFromRecordRaw(row))
                 })
             })
         })
@@ -93,7 +93,7 @@ export class DBRepository {
                     if (err) {
                         reject(err)
                     }
-                    resolve(MapFromRaws(rows))
+                    resolve(mapFromRecordRaws(rows))
                 })
             })
         })
@@ -108,7 +108,7 @@ export class DBRepository {
                     if (err) {
                         reject(err)
                     }
-                    resolve(MapFromRaws(rows))
+                    resolve(mapFromRecordRaws(rows))
                 })
             })
         })
@@ -121,7 +121,7 @@ export class DBRepository {
                     if (err) {
                         reject(err)
                     }
-                    resolve(MapFromRaws(rows))
+                    resolve(mapFromRecordRaws(rows))
                 })
             })
         })
@@ -134,7 +134,7 @@ export class DBRepository {
                     if (err) {
                         reject(err)
                     }
-                    resolve(MapFromRaws(rows))
+                    resolve(mapFromRecordRaws(rows))
                 })
             })
         })
@@ -163,14 +163,15 @@ export class DBRepository {
         })
     }
 
-    listClients() {
+    listClients(): Promise<Client[]> {
         return new Promise((resolve, reject) => {
             db.serialize(() => {
                 db.all("select * from client", (err, rows) => {
                     if (err) {
                         reject(err)
                     }
-                    resolve(rows)
+                    console.log('CLIENEEET', rows)
+                    resolve(mapFromClientRaws(rows))
                 })
             })
         })

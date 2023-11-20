@@ -23,13 +23,10 @@ const InfoBox: React.FC<InfoBoxProps> = () => {
 
   const dateFrom = useGetDateFrom();
   const dateTo = useGetDateTo();
-  // const dateFromString = useGetDateFromString()
-  // const dateToString = useGetDateToString()
 
   function currencyFormat(num) {
     return "$" + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   }
-  console.log(currencyFormat(2665));
 
   return (
     <Stack>

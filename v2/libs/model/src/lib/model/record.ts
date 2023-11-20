@@ -52,7 +52,7 @@ const parseImporte = (importe: string, receiptType: string): number => {
     return isNotaDeCredito(receiptType) ? -1 * float : float
 }
 
-const MapFromRaw = (row: any): AFIPRecordRow => {
+const mapFromRecordRaw = (row: any): AFIPRecordRow => {
     return {
         authCod: row.auth_code,
         changeType: row.change_type,
@@ -78,8 +78,8 @@ const MapFromRaw = (row: any): AFIPRecordRow => {
     } as AFIPRecordRow
 }
 
-const MapFromRaws = (rows: any[]): AFIPRecordRow[] => {
-    return rows.map(r => MapFromRaw(r))
+const mapFromRecordRaws = (rows: any[]): AFIPRecordRow[] => {
+    return rows.map(r => mapFromRecordRaw(r))
 }
 
 const formatDate = (stringDate: string): Date => {
@@ -104,6 +104,6 @@ const isNotaDeCredito = (code: string) => {
 
 export {
     ParseToData,
-    MapFromRaw,
-    MapFromRaws
+    mapFromRecordRaw,
+    mapFromRecordRaws
 }
