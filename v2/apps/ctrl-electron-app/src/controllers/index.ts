@@ -8,11 +8,14 @@ class EventController {
         this.clientService = clientService
     }
     async processMessage({ action, payload }) {
+        console.log({action, payload})
         switch (action) {
             case actions.CREATE_RECORD:
                 return await this.recordService.insertRecord(payload)
             case actions.CREATE_RECORDS:
                 return await this.recordService.insertRecords(payload)
+            case actions.DELETE_RECORDS_BY_CLIENT:
+                return await this.recordService.deleteRecordsByClientCuit(payload.clientCuit)
             case actions.FILTER_RECORDS_BY_CLIENT_CUIT:
                 return await this.recordService.selectById(payload.clientCuit)
             case actions.CREATE_CLIENT:

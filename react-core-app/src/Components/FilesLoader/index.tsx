@@ -77,6 +77,10 @@ function Loader() {
             <Button color="primary" variant="contained" component="span" disabled={!isClientSelected}>
               Cargar Archivos CSV
             </Button>
+
+            <Button color="error" variant="contained" component="span" disabled={!isClientSelected}>
+              Borrar registros
+            </Button>
           </label>
         </Stack>
         <ModalLoader afipRecordRows={filesData} closeModal={closeModal} isModalOpen={modalOpen}></ModalLoader>

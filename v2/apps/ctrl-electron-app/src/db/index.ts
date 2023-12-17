@@ -60,6 +60,21 @@ export class DBRepository {
         })
     }
 
+    deleteRecordsByClientCuit(clientCuit: string): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            db.serialize(() => {
+                const stmt = db.prepare("DELETE FROM client_record where client_cuit = ?;")
+                stmt.run([clientCuit], (err) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(true)
+                    }
+                })
+            })
+        })
+    }
+
     selectRecordById(id: string): Promise<AFIPRecordRow> {
         return new Promise((resolve, reject) => {
             db.serialize(() => {

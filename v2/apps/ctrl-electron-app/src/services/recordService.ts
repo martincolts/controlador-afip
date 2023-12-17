@@ -34,6 +34,10 @@ class RecordService {
         return recordsWithErrors
     }
 
+    async deleteRecordsByClientCuit(clientCuit: string): Promise<boolean> {
+        return await this.dbRepository.deleteRecordsByClientCuit(clientCuit)
+    }
+
     async selectById(id: string) {
         return await this.dbRepository.selectRecordById(id)
     }
